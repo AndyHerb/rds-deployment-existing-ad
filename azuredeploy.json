@@ -29,19 +29,32 @@
       },
       "defaultValue": "[concat('ADStaticSubnet',resourceGroup().name)]"
     },
-    "adminUsername": {
+    "localAdminUsername": {
       "type": "string",
       "metadata": {
-        "description": "The name of the administrator of the new VM and the domain. Exclusion list: 'administrator'. For example johnadmin"
+        "description": "The name of the administrator of the new VM. Exclusion list: 'administrator'. For example johnadmin"
       },
-      "defaultValue": "vmadmin"
+      "defaultValue": "localAdmin"
     },
-    "adminPassword": {
+    "localAdminPassword": {
       "type": "securestring",
       "metadata": {
-        "description": "The password for the administrator account of the new VM and the domain"
+        "description": "The password for the administrator account of the new VM"
       },
       "defaultValue": "[concat('Subscription#',subscription().subscriptionId)]"
+    },
+    "domainAccountUsername": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the account to join the new VMs to the domain"
+      },
+      "defaultValue": "localAdmin"
+    },
+    "domainAccountPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "The password for the account to join the new VMs to the domain"
+      }
     },
     "imageSKU": {
       "type": "string",
@@ -379,8 +392,8 @@
         },
         "osProfile": {
           "computerName": "gateway",
-          "adminUsername": "[parameters('adminUsername')]",
-          "adminPassword": "[parameters('adminPassword')]"
+          "adminUsername": "[parameters('localAdminUsername')]",
+          "adminPassword": "[parameters('localAdminPassword')]"
         },
         "storageProfile": {
           "imageReference": {
@@ -421,14 +434,14 @@
               "Properties": {
                 "DomainName": "[parameters('adDomainName')]",
                 "AdminCreds": {
-                  "UserName": "[parameters('adminUsername')]",
+                  "UserName": "[parameters('domainAccountUsername')]",
                   "Password": "PrivateSettingsRef:AdminPassword"
                 }
               }
             },
             "protectedSettings": {
               "Items": {
-                "AdminPassword": "[parameters('adminPassword')]"
+                "AdminPassword": "[parameters('domainAccountPassword')]"
               }
             }
           }
@@ -457,8 +470,8 @@
         },
         "osProfile": {
           "computerName": "[concat('rdsh-', copyIndex())]",
-          "adminUsername": "[parameters('adminUsername')]",
-          "adminPassword": "[parameters('adminPassword')]"
+          "adminUsername": "[parameters('localAdminUsername')]",
+          "adminPassword": "[parameters('localAdminPassword')]"
         },
         "storageProfile": {
           "imageReference": {
@@ -499,14 +512,14 @@
               "Properties": {
                 "DomainName": "[parameters('adDomainName')]",
                 "AdminCreds": {
-                  "UserName": "[parameters('adminUsername')]",
+                  "UserName": "[parameters('domainAccountUsername')]",
                   "Password": "PrivateSettingsRef:AdminPassword"
                 }
               }
             },
             "protectedSettings": {
               "Items": {
-                "AdminPassword": "[parameters('adminPassword')]"
+                "AdminPassword": "[parameters('domainAccountPassword')]"
               }
             }
           }
@@ -532,8 +545,8 @@
         },
         "osProfile": {
           "computerName": "broker",
-          "adminUsername": "[parameters('adminUsername')]",
-          "adminPassword": "[parameters('adminPassword')]"
+          "adminUsername": "[parameters('localAdminUsername')]",
+          "adminPassword": "[parameters('localAdminPassword')]"
         },
         "storageProfile": {
           "imageReference": {
@@ -575,7 +588,7 @@
           "configurationFunction": "Configuration.ps1\\RDSDeployment",
           "Properties": {
             "adminCreds": {
-              "UserName": "[parameters('adminUsername')]",
+              "UserName": "[parameters('domainAccountUsername')]",
               "Password": "PrivateSettingsRef:adminPassword"
             },
             "connectionBroker": "[concat('broker.',parameters('adDomainName'))]",
@@ -588,7 +601,7 @@
         },
         "protectedSettings": {
           "Items": {
-            "adminPassword": "[parameters('adminPassword')]"
+            "adminPassword": "[parameters('domainAccountPassword')]"
           }
         }
       }
