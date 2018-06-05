@@ -571,12 +571,12 @@
     },
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "cb-vm/rdsdeployment",
+      "name": "[concat('VM', variables('Prefix'), 'CB', '/rdsdeployment')]",
       "apiVersion": "2017-03-30",
       "location": "[parameters('location')]",
       "dependsOn": [
         "[resourceId('Microsoft.Compute/virtualMachines', concat('VM', variables('Prefix'), 'CB'))]",
-        "[resourceId('Microsoft.Compute/virtualMachines', concat('VM', variables('Prefix'), 'GW'), 'gateway')]",
+        "[resourceId('Microsoft.Compute/virtualMachines/extensions', concat('VM', variables('Prefix'), 'GW'), 'gateway')]",
         "rdsh-vm-loop"
       ],
       "properties": {
