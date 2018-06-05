@@ -422,7 +422,7 @@
           "id": "[resourceId('Microsoft.Compute/availabilitySets', concat('AS', variables('Prefix'), 'GW'))]"
         },
         "osProfile": {
-          "computerName": "gateway",
+          "computerName": "[concat('VM', variables('Prefix'), 'GW')]",
           "adminUsername": "[parameters('localAdminUsername')]",
           "adminPassword": "[parameters('localAdminPassword')]"
         },
@@ -457,7 +457,7 @@
           "properties": {
             "publisher": "Microsoft.Powershell",
             "type": "DSC",
-            "typeHandlerVersion": "2.11",
+            "typeHandlerVersion": "2.19",
             "autoUpgradeMinorVersion": true,
             "settings": {
               "modulesUrl": "[variables('configurationUri')]",
@@ -500,7 +500,7 @@
           "id": "[resourceId('Microsoft.Compute/availabilitySets', concat('AS', variables('Prefix'), 'SH'))]"
         },
         "osProfile": {
-          "computerName": "[concat('rdsh-', copyIndex())]",
+          "computerName": "[concat('VM', variables('Prefix'), 'SH', copyindex())]",
           "adminUsername": "[parameters('localAdminUsername')]",
           "adminPassword": "[parameters('localAdminPassword')]"
         },
@@ -575,7 +575,7 @@
           "id": "[resourceId('Microsoft.Compute/availabilitySets', concat('AS', variables('prefix'), 'CB'))]"
         },
         "osProfile": {
-          "computerName": "broker",
+          "computerName": "[concat('VM', variables('Prefix'), 'CB')]",
           "adminUsername": "[parameters('localAdminUsername')]",
           "adminPassword": "[parameters('localAdminPassword')]"
         },
