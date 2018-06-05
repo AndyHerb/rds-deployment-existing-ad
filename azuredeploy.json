@@ -490,7 +490,7 @@
         "networkProfile": {
           "networkInterfaces": [
             {
-              "id": "[resourceId('Microsoft.Compute/availabilitySets', concat('NIC', variables('Prefix'), 'SH', copyindex()))]"
+              "id": "[resourceId('Microsoft.Compute/networkInterfaces', concat('NIC', variables('Prefix'), 'SH', copyindex()))]"
             }
           ]
         }
