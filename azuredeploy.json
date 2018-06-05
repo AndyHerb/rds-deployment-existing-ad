@@ -127,7 +127,7 @@
     "brokerIpRef": "[concat('PIP-', parameters('label'), 'CB')]",
     "gatewayIpRef": "[concat('PIP-', parameters('label'), 'GW')]",
 
-    "loadBalancerName": "[concat('PLB', parameters('label'))]",
+    "loadBalancerName": "[concat('PLB-', parameters('label'))]",
 
     "configurationUri": "[uri(deployment().properties.templateLink.uri, 'Configuration.zip')]"
   },
