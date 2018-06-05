@@ -23,6 +23,13 @@
       },
       "defaultValue": "[concat('ADVNET',resourceGroup().name)]"
     },
+    "adVnetResourceGroup": {
+      "type": "string",
+      "metadata": {
+        "description": "The resource group name containing the vNet linked to the AD domain"
+      },
+      "defaultValue": "[resourceGroup().name]"
+    },
     "adSubnetName": {
       "type": "string",
       "metadata": {
@@ -121,7 +128,7 @@
     "imagePublisher": "MicrosoftWindowsServer",
     "imageOffer": "WindowsServer",
 
-    "subnet-id": "[concat(resourceId('Microsoft.Network/virtualNetworks',parameters('adVnetName')),'/subnets/',parameters('adSubnetName'))]",
+    "subnet-id": "[concat(resourceId(parameters('adVnetResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('adVnetName')), '/subnets/', parameters('adSubnetName'))]",
 
     "publicIpRef": "[concat('PIP-', parameters('label'))]",
     "brokerIpRef": "[concat('PIP-', parameters('label'), 'CB')]",
