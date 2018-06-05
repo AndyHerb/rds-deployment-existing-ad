@@ -136,7 +136,10 @@
 
     "loadBalancerName": "[concat('PLB-', parameters('label'))]",
 
-    "configurationUri": "[uri(deployment().properties.templateLink.uri, 'Configuration.zip')]"
+    "configurationUri": "[uri(deployment().properties.templateLink.uri, 'Configuration.zip')]",
+
+    "platformFaultDomainCount": 2,
+    "platformUpdateDomainCount":  5
   },
   "resources": [
     {
@@ -180,7 +183,10 @@
       "type": "Microsoft.Compute/availabilitySets",
       "name": "[concat('AS', variables('Prefix'), 'GW')]",
       "location": "[parameters('location')]",
-      "properties": {},
+      "properties": {
+        "platformFaultDomainCount": "[variables('platformFaultDomainCount')]",
+        "platformUpdateDomainCount": "[variables('platformUpdateDomainCount')]"
+      },
       "sku": {
         "name": "Aligned"
       }
@@ -190,7 +196,10 @@
       "type": "Microsoft.Compute/availabilitySets",
       "name": "[concat('AS', variables('Prefix'), 'CB')]",
       "location": "[parameters('location')]",
-      "properties": {},
+      "properties": {
+        "platformFaultDomainCount": "[variables('platformFaultDomainCount')]",
+        "platformUpdateDomainCount": "[variables('platformUpdateDomainCount')]"
+      },
       "sku": {
         "name": "Aligned"
       }
@@ -200,7 +209,10 @@
       "type": "Microsoft.Compute/availabilitySets",
       "name": "[concat('AS', variables('Prefix'), 'SH')]",
       "location": "[parameters('location')]",
-      "properties": {},
+      "properties": {
+        "platformFaultDomainCount": "[variables('platformFaultDomainCount')]",
+        "platformUpdateDomainCount": "[variables('platformUpdateDomainCount')]"
+      },
       "sku": {
         "name": "Aligned"
       }
