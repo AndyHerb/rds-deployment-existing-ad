@@ -576,7 +576,7 @@
       "location": "[parameters('location')]",
       "dependsOn": [
         "[resourceId('Microsoft.Compute/virtualMachines', concat('VM', variables('Prefix'), 'CB'))]",
-        "[concat('VM', variables('Prefix'), 'GW/gateway')]",
+        "[resourceId('Microsoft.Compute/virtualMachines', concat('VM', variables('Prefix'), 'GW'), 'gateway')]",
         "rdsh-vm-loop"
       ],
       "properties": {
