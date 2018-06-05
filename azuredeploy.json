@@ -127,7 +127,7 @@
     "brokerIpRef": "[concat('PIP-', parameters('label'), 'CB')]",
     "gatewayIpRef": "[concat('PIP-', parameters('label'), 'GW')]",
 
-    "assetLocation": "[deployment().templateLink.uri]"
+    "configurationUri": "[uri(deployment().properties.templateLink.uri, 'Configuration.zip')]"
   },
   "resources": [
     {
@@ -167,21 +167,21 @@
       }
     },
     {
-      "apiVersion": "2017-07-01-preview",
+      "apiVersion": "2017-12-01",
       "type": "Microsoft.Compute/availabilitySets",
       "name": "[concat('AS', variables('Prefix'), 'GW')]",
       "location": "[parameters('location')]",
       "properties": {}
     },
     {
-      "apiVersion": "2017-07-01-preview",
+      "apiVersion": "2017-12-01",
       "type": "Microsoft.Compute/availabilitySets",
       "name": "[concat('AS', variables('Prefix'), 'CB')]",
       "location": "[parameters('location')]",
       "properties": {}
     },
     {
-      "apiVersion": "2017-07-01-preview",
+      "apiVersion": "2017-12-01",
       "type": "Microsoft.Compute/availabilitySets",
       "name": "concat('AS', variables('Prefix'), 'SH')",
       "location": "[parameters('location')]",
@@ -430,8 +430,8 @@
             "typeHandlerVersion": "2.11",
             "autoUpgradeMinorVersion": true,
             "settings": {
-              "ModulesUrl": "[concat(variables('assetLocation'),'/Configuration.zip')]",
-              "ConfigurationFunction": "Configuration.ps1\\Gateway",
+              "modulesUrl": "[variables('configurationUri')]",
+              "configurationFunction": "Configuration.ps1\\Gateway",
               "Properties": {
                 "DomainName": "[parameters('adDomainName')]",
                 "AdminCreds": {
@@ -508,7 +508,7 @@
             "typeHandlerVersion": "2.11",
             "autoUpgradeMinorVersion": true,
             "settings": {
-              "modulesUrl": "[concat(variables('assetLocation'),'/Configuration.zip')]",
+              "modulesUrl": "[variables('configurationUri')]",
               "configurationFunction": "Configuration.ps1\\SessionHost",
               "Properties": {
                 "DomainName": "[parameters('adDomainName')]",
@@ -585,7 +585,7 @@
         "typeHandlerVersion": "2.11",
         "autoUpgradeMinorVersion": true,
         "settings": {
-          "modulesUrl": "[concat(variables('assetLocation'),'/Configuration.zip')]",
+          "modulesUrl": "[variables('configurationUri')]",
           "configurationFunction": "Configuration.ps1\\RDSDeployment",
           "Properties": {
             "adminCreds": {
