@@ -216,10 +216,10 @@
             "name": "LBRule01",
             "properties": {
               "frontendIPConfiguration": {
-                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', 'PLB', variables('Prefix')),'/frontendIPConfigurations/LBFE')]"
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', concat('PLB', variables('Prefix'))),'/frontendIPConfigurations/LBFE')]"
               },
               "backendAddressPool": {
-                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', 'PLB', variables('Prefix')),'/backendAddressPools/LBBAP')]"
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', concat('PLB', variables('Prefix'))),'/backendAddressPools/LBBAP')]"
               },
               "protocol": "Tcp",
               "frontendPort": 443,
@@ -228,7 +228,7 @@
               "idleTimeoutInMinutes": 5,
               "loadDistribution": "SourceIPProtocol",
               "probe": {
-                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', 'PLB', variables('Prefix')),'/probes/tcpProbe')]"
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', concat('PLB', variables('Prefix'))),'/probes/tcpProbe')]"
               }
             }
           },
@@ -236,10 +236,10 @@
             "name": "LBRule02",
             "properties": {
               "frontendIPConfiguration": {
-                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', 'PLB', variables('Prefix')),'/frontendIPConfigurations/LBFE')]"
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', concat('PLB', variables('Prefix'))),'/frontendIPConfigurations/LBFE')]"
               },
               "backendAddressPool": {
-                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', 'PLB', variables('Prefix')),'/backendAddressPools/LBBAP')]"
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', concat('PLB', variables('Prefix'))),'/backendAddressPools/LBBAP')]"
               },
               "protocol": "Udp",
               "frontendPort": 3391,
@@ -248,7 +248,7 @@
               "idleTimeoutInMinutes": 5,
               "loadDistribution": "SourceIPProtocol",
               "probe": {
-                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', 'PLB', variables('Prefix')),'/probes/tcpProbe')]"
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', concat('PLB', variables('Prefix'))),'/probes/tcpProbe')]"
               }
             }
           }
@@ -278,7 +278,7 @@
             "name": "rdp",
             "properties": {
               "frontendIPConfiguration": {
-                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', 'PLB', variables('Prefix')),'/frontendIPConfigurations/LBFE')]"
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', concat('PLB', variables('Prefix'))),'/frontendIPConfigurations/LBFE')]"
               },
               "protocol": "tcp",
               "frontendPort": 3389,
@@ -311,12 +311,12 @@
               },
               "loadBalancerBackendAddressPools": [
                 {
-                  "id": "[concat(resourceId('Microsoft.Network/loadBalancers', 'PLB', variables('Prefix')),'/backendAddressPools/LBBAP')]"
+                  "id": "[concat(resourceId('Microsoft.Network/loadBalancers', concat('PLB', variables('Prefix'))),'/backendAddressPools/LBBAP')]"
                 }
               ],
               "loadBalancerInboundNatRules": [
                 {
-                  "id": "[concat(resourceId('Microsoft.Network/loadBalancers', 'PLB', variables('Prefix')),'/inboundNatRules/rdp')]"
+                  "id": "[concat(resourceId('Microsoft.Network/loadBalancers', concat('PLB', variables('Prefix'))),'/inboundNatRules/rdp')]"
                 }
               ]
             }
