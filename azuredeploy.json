@@ -185,7 +185,7 @@
     {
       "apiVersion": "2017-12-01",
       "type": "Microsoft.Compute/availabilitySets",
-      "name": "concat('AS', variables('Prefix'), 'SH')",
+      "name": "[concat('AS', variables('Prefix'), 'SH')]",
       "location": "[parameters('location')]",
       "properties": {}
     },
@@ -294,7 +294,7 @@
     {
       "apiVersion": "2018-01-01",
       "type": "Microsoft.Network/networkInterfaces",
-      "name": "gw-nic",
+      "name": "[concat('NIC', variables('Prefix'), 'GW')]",
       "location": "[parameters('location')]",
       "dependsOn": [
         "[resourceId('Microsoft.Network/loadBalancers', variables('loadBalancerName'))]"
@@ -329,7 +329,7 @@
     {
       "apiVersion": "2018-01-01",
       "type": "Microsoft.Network/networkInterfaces",
-      "name": "cb-nic",
+      "name": "[concat('NIC', variables('Prefix'), 'CB')]",
       "location": "[parameters('location')]",
       "dependsOn": [
         "[resourceId('Microsoft.Network/loadBalancers', variables('loadBalancerName'))]"
