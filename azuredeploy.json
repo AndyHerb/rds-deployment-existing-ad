@@ -354,7 +354,7 @@
     {
       "apiVersion": "2018-01-01",
       "type": "Microsoft.Network/networkInterfaces",
-      "name": "[concat('rdsh-', copyindex(), '-nic')]",
+      "name": "[concat('NIC', variables('Prefix'), 'SH', copyindex())]",
       "location": "[parameters('location')]",
       "copy": {
         "name": "rdsh-nic-loop",
@@ -462,7 +462,7 @@
       },
       "dependsOn": [
         "[resourceId('Microsoft.Compute/availabilitySets', concat('AS', variables('Prefix'), 'SH'))]",
-        "[resourceId('Microsoft.Compute/availabilitySets', concat('NIC', variables('Prefix'), 'SH', copyindex()))]"
+        "[resourceId('Microsoft.Compute/networkInterfaces', concat('NIC', variables('Prefix'), 'SH', copyindex()))]"
       ],
       "properties": {
         "hardwareProfile": {
