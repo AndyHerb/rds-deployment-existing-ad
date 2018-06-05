@@ -127,7 +127,7 @@
     "brokerIpRef": "[concat('PIP-', parameters('label'), 'CB')]",
     "gatewayIpRef": "[concat('PIP-', parameters('label'), 'GW')]",
 
-    "loadBalancerName": "variables('loadBalancerName')",
+    "loadBalancerName": "[concat('PLB', parameters('label'))]",
 
     "configurationUri": "[uri(deployment().properties.templateLink.uri, 'Configuration.zip')]"
   },
@@ -282,7 +282,7 @@
               "frontendIPConfiguration": {
                 "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('loadBalancerName')),'/frontendIPConfigurations/LBFE')]"
               },
-              "protocol": "tcp",
+              "protocol": "Tcp",
               "frontendPort": 3389,
               "backendPort": 3389,
               "enableFloatingIP": false
