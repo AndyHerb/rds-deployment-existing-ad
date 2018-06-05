@@ -180,21 +180,30 @@
       "type": "Microsoft.Compute/availabilitySets",
       "name": "[concat('AS', variables('Prefix'), 'GW')]",
       "location": "[parameters('location')]",
-      "properties": {}
+      "properties": {},
+      "sku": {
+        "name": "Aligned"
+      }
     },
     {
       "apiVersion": "2017-12-01",
       "type": "Microsoft.Compute/availabilitySets",
       "name": "[concat('AS', variables('Prefix'), 'CB')]",
       "location": "[parameters('location')]",
-      "properties": {}
+      "properties": {},
+      "sku": {
+        "name": "Aligned"
+      }
     },
     {
       "apiVersion": "2017-12-01",
       "type": "Microsoft.Compute/availabilitySets",
       "name": "[concat('AS', variables('Prefix'), 'SH')]",
       "location": "[parameters('location')]",
-      "properties": {}
+      "properties": {},
+      "sku": {
+        "name": "Aligned"
+      }
     },
     {
       "apiVersion": "2018-01-01",
