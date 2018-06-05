@@ -462,7 +462,7 @@
       },
       "dependsOn": [
         "[resourceId('Microsoft.Compute/availabilitySets', concat('AS', variables('Prefix'), 'SH'))]",
-        "[resourceId('Microsoft.Compute/networkInterfaces', concat('NIC', variables('Prefix'), 'SH', copyindex()))]"
+        "[resourceId('Microsoft.Network/networkInterfaces', concat('NIC', variables('Prefix'), 'SH', copyindex()))]"
       ],
       "properties": {
         "hardwareProfile": {
@@ -490,7 +490,7 @@
         "networkProfile": {
           "networkInterfaces": [
             {
-              "id": "[resourceId('Microsoft.Compute/networkInterfaces', concat('NIC', variables('Prefix'), 'SH', copyindex()))]"
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', concat('NIC', variables('Prefix'), 'SH', copyindex()))]"
             }
           ]
         }
